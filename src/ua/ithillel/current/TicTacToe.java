@@ -8,6 +8,7 @@ public class TicTacToe {
     private static final char EMPTY_SYMBOL = '-';
     public static int fieldSize;
     public static final int BOUND_OF_SIZE = 10;
+    public static int endingOfGame;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -39,16 +40,20 @@ public class TicTacToe {
         MoveResult moveResult;
         Coordinate coordinate;
 
-        moveResult = coordinateFinder.findCoordinate();
-        coordinate = moveResult.getCoordinate();
-
-        while (field[coordinate.getVertical()][coordinate.getHorizontal()] != EMPTY_SYMBOL) {
+        if (endingOfGame != fieldSize * fieldSize) {
 
             moveResult = coordinateFinder.findCoordinate();
             coordinate = moveResult.getCoordinate();
-        }
 
-        field[coordinate.getVertical()][coordinate.getHorizontal()] = moveResult.getSymbol();
+            while (field[coordinate.getVertical()][coordinate.getHorizontal()] != EMPTY_SYMBOL) {
+
+                moveResult = coordinateFinder.findCoordinate();
+                coordinate = moveResult.getCoordinate();
+            }
+
+            field[coordinate.getVertical()][coordinate.getHorizontal()] = moveResult.getSymbol();
+        }
+        endingOfGame ++;
     }
 
     private int writeSize() {
